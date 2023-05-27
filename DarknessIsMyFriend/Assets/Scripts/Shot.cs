@@ -6,6 +6,7 @@ public class Shot : MonoBehaviour
 {
     public GameObject dragIndicatorObj;
     private Vector3 dragIndicatorOrigPos;
+    private Vector3 shotInitPos;
 
     private Rigidbody rb;
 
@@ -16,20 +17,26 @@ public class Shot : MonoBehaviour
 
     private bool draggingShot = false;
 
-    private float maxDragDistance = 70.0f;
-    private float maxShotForce = 3000.0f;
+    [SerializeField] private float maxDragDistance = 70.0f;
+    [SerializeField] private float maxShotForce = 3000.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         dragIndicatorOrigPos = dragIndicatorObj.transform.position;
+        shotInitPos = transform.position;
     }
 
     void Update(){
         if(draggingShot){
             CalcDragPower();
             IndicateDragPower();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R)) {
+            transform.position = shotInitPos;
+            rb.velocity = Vector3.zero;
         }
     }
 
