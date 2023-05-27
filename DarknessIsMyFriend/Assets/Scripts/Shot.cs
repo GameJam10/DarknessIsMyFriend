@@ -64,7 +64,6 @@ public class Shot : MonoBehaviour
     }
 
     private void GottaShootMyShot(){
-
         dragVec = new Vector3(dragVec.x * maxShotForce, 0, dragVec.z * maxShotForce);
         Debug.Log(dragVec);
         rb.AddForce(dragVec);
