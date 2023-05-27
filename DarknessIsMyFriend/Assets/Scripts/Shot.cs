@@ -26,6 +26,7 @@ public class Shot : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         dragIndicatorOrigPos = dragIndicatorObj.transform.position;
         shotInitPos = transform.position;
+        FreezePosition(true);
     }
 
     void Update(){
@@ -37,6 +38,7 @@ public class Shot : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) {
             transform.position = shotInitPos;
             rb.velocity = Vector3.zero;
+            FreezePosition(true);
         }
     }
 
@@ -71,6 +73,7 @@ public class Shot : MonoBehaviour
     }
 
     private void GottaShootMyShot(){
+        FreezePosition(false);
         dragVec = new Vector3(dragVec.x * maxShotForce, 0, dragVec.z * maxShotForce);
         Debug.Log(dragVec);
         rb.AddForce(dragVec);
@@ -79,5 +82,14 @@ public class Shot : MonoBehaviour
 
     private void ResetIndicatorPosition(){
         dragIndicatorObj.transform.position = dragIndicatorOrigPos;
+    }
+
+    private void FreezePosition(bool on){
+        if(on){
+            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+        }else {
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezePositionY;
+        }
     }
 }
