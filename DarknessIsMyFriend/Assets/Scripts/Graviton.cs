@@ -71,13 +71,13 @@ public class Graviton : MonoBehaviour
         IsAttractee = isAttractee;
     }
 
-    private void Start()
-    {
-        if(applyInitialVelocityOnStart)
-        {
-            ApplyVelocity(initialVelocity);
-        }
-    }
+    //private void Start()
+    //{
+    //    if(applyInitialVelocityOnStart)
+    //    {
+    //        ApplyVelocity(initialVelocity);
+    //    }
+    //}
 
     private void OnDisable()
     {
@@ -85,7 +85,7 @@ public class Graviton : MonoBehaviour
         GravityScript.attractees.Remove(rigidBody);
     }
 
-    void ApplyVelocity (Vector3 velocity)
+    public void ApplyVelocity (Vector3 velocity)
     {
         rigidBody.AddForce(initialVelocity, ForceMode.Impulse);
     }
